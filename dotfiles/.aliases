@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias -- -="cd -"
+
+alias vim="vim -O"
 
 # Shortcuts
 alias dc="cd ~/Documents"
@@ -84,6 +85,9 @@ alias reload="exec ${SHELL} -l"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 
+# Show current jobs
+alias "jobs"='jobs -l'
+
 ## GIT ALIASES
 
 alias "gits"='clear; git status'
@@ -95,7 +99,7 @@ alias "gitcm"='git commit -m'
 alias "gitcam"='git commit -am'
 alias "gith"='git log --oneline --graph --decorate --all'
 alias "gitls"='git ls-files'
-alias "gitdftl"='git difftool'
+alias "gitdf"='git difftool --no-prompt'
 alias "gitck"='git checkout'
 alias "gitckm"='git checkout master'
 alias "gitckd"='git checkout develop'

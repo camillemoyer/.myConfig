@@ -14,9 +14,10 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 " My Plugins "
-Plugin 'powerline/powerline'
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-airline/vim-airline'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'python-mode/python-mode'
+"Plugin 'python-mode/python-mode'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
 Plugin 'scrooloose/nerdtree'
@@ -24,8 +25,8 @@ Plugin 'tmhedberg/SimpylFold'
 Plugin 'fjcasti1/lichen'
 Plugin 'lervag/vimtex'
 "Plugin 'xuhdev/vim-latex-live-preview'
-Plugin 'jreybert/vimagit'
 Plugin 'mattn/emmet-vim'
+Plugin 'mbbill/undotree'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -66,10 +67,10 @@ let mapleader = " "
 "Backspace behaves normally"
 set backspace=indent,eol,start
 
-" Tabs "
-map <Leader>t :tabnew<CR>
-map <Leader>n :tabnext<CR>
-map <Leader>b :tabprevious<CR>
+" Tabs in different buffers vertically split"
+map <Leader>t :new<CR>:vert ba<CR>
+map <Leader>n :bnext<CR>
+map <Leader>b :bprev<CR>
 
 " Horizontal splits "
 map <Leader>h :split<CR>
@@ -81,9 +82,13 @@ map <Leader>v :vsplit<CR>
 map <Leader><Left> <c-w><Left><CR>
 map <Leader><Right> <c-w><Right><CR>
 
-" Save & Quit Quick "
-noremap <Leader>q :q<CR>
+" Undo Tree "
+nnoremap <Leader>u :UndotreeShow<CR>
+" Quit Buffers "
+noremap <Leader>d :bd<CR>
+" Quick Save & Quit "
 noremap <Leader>w :w<CR>
+noremap <Leader>q :q<CR>
 inoremap ww <Esc>:w<CR>i
 
 " Map sort function to a key, removes duplicates "
@@ -269,7 +274,7 @@ autocmd Syntax * call HighlightKeywords()
 set laststatus=2
 
 " Settings for ctrlP "
-map <Leader>o <C-p>
+map <Leader>f <C-p>
 let g:ctrlp_max_height = 20
 let g:ctrlp_working_path_mode = 'aw'
 let g:ctrlp_show_hidden = 1
@@ -321,21 +326,22 @@ let g:jedi#popup_select_first = 1
 " NERDTree "
 "map <Leader>a :NERDTree<CR>
 "map <Leader>' :NERDTreeClose<CR>
-map <Leader>f :NERDTreeToggle<CR>
+map <Leader>o :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen=3
 let NERDTreeNaturalSort=1
+let NERDTreeShowHidden=1
 "let NERDTreeCustomOpenArgs={'file':{'where':'t'}, 'dir':{'where':'t'}}
 
 " Searching faster
 map s :%s/
 
-" GIT "
-map <Leader>m :Magit<CR>
-let g:magit_default_fold_level=0
-let g:magit_auto_close=1
-autocmd User VimagitEnterCommit startinsert
-autocmd User VimagitEnterCommit setlocal textwidth=72
-autocmd User VimagitLeaveCommit setlocal textwidth=0
+" GIT - FUGITIVE"
+map <Leader>g :G<CR>
+map <Leader>gc :Gcommit<CR>
+map <Leader>gps :Gpush<CR>
+map <Leader>gpl :Gpull<CR>
+map <Leader>gf :diffget //2<CR>
+map <Leader>gh :diffget //3<CR>
 
 ""LATEX
 
@@ -454,4 +460,6 @@ let g:vimtex_quickfix_latexlog = {
 " HTML "
 autocmd BufNewFile *.html 0r ~/.vim/templates/skeleton.html
 let g:user_emmet_leader_key='<Tab>'
-autocmd FileType html inoremap qq <Esc>
+
+
+let g:airline#extensions#tabline#enabled = 1

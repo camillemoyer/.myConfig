@@ -17,3 +17,11 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ln -s ~/.myConfig/.vim/templates ~/.vim/templates
 # Install Plugins
 vim ~/.myConfig/vimInstallNotes.txt -c 'PluginInstall!' -c 'qa!'
+
+# Install fzf
+rm -rf ~/.fzf
+rm ~/.fzf.bash
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+# Generate .fzf.bash for autocompletion and key-bindings
+# Answers yes to all questions
+echo y | ~/./.fzf/install
